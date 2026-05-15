@@ -39,7 +39,6 @@ class _FotoState extends State<Foto> {
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          // crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             FutureBuilder<void>(
               future: _initializeControllerFuture,
