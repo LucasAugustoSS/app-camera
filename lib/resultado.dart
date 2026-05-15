@@ -29,62 +29,65 @@ class _ResultadoState extends State<Resultado> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Mostrar a foto tirada')),
-      body: Column(
-        children: [
-          Expanded(
-            child: caminhoAtual != null ? Image.file(File(caminhoAtual!)) : const CircularProgressIndicator()
-          ),
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: SegmentedButton<String>(
-              segments: const [
-                ButtonSegment(
-                  value: 'original',
-                  label: Text('Original'),
-                ),
-                ButtonSegment(
-                  value: 'cinza',
-                  label: Text('Cinza'),
-                ),
-                ButtonSegment(
-                  value: 'bordas',
-                  label: Text('Bordas'),
-                ),
-              ],
-              selected: {filtroAtual},
-              onSelectionChanged: (filtroSelecionado) {
-                setState(() {
-                  filtroAtual = filtroSelecionado.first;
+      appBar: AppBar(title: const Text('Resultado')),
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: caminhoAtual != null ? Image.file(File(caminhoAtual!)) : const CircularProgressIndicator()
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16),
+              child: SegmentedButton<String>(
+                segments: const [
+                  ButtonSegment(
+                    value: 'original',
+                    label: Text('Original'),
+                  ),
+                  ButtonSegment(
+                    value: 'cinza',
+                    label: Text('Cinza'),
+                  ),
+                  ButtonSegment(
+                    value: 'bordas',
+                    label: Text('Bordas'),
+                  ),
+                ],
+                selected: {filtroAtual},
+                onSelectionChanged: (filtroSelecionado) {
+                  setState(() {
+                    filtroAtual = filtroSelecionado.first;
 
-                  switch (filtroAtual) {
-                    case 'original':
-                      caminhoAtual = widget.caminhoFoto;
-                      break;
+                    switch (filtroAtual) {
+                      case 'original':
+                        caminhoAtual = widget.caminhoFoto;
+                        break;
 
-                    case 'cinza':
-                      caminhoAtual = caminhoCinza;
-                      break;
+                      case 'cinza':
+                        caminhoAtual = caminhoCinza;
+                        break;
 
-                    case 'bordas':
-                      caminhoAtual = caminhoBordas;
-                      break;
-                  }
-                });
-              },
-              showSelectedIcon: false,
-              style: SegmentedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
-                side: const BorderSide(
-                  width: 1.5,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10),
+                      case 'bordas':
+                        caminhoAtual = caminhoBordas;
+                        break;
+                    }
+                  });
+                },
+                showSelectedIcon: false,
+                style: SegmentedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                  side: const BorderSide(
+                    width: 1.5,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                 ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
